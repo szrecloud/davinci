@@ -42,7 +42,7 @@ export const initialState: IState = {
   vizType: '',
   permissionLoading: false,
   download: false,
-  oauth2Enabled: false,
+  oauth2Enabled: true,
   externalAuthProviders: []
 }
 

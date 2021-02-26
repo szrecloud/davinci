@@ -44,6 +44,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -141,5 +142,12 @@ public class LoginController {
             return ResponseEntity.ok(new ResultMap().success(token).payload(userLoginResult));
         }
         return ResponseEntity.status(401).build();
+    }
+
+    @ApiOperation(value = "kc logout")
+    @AuthIgnore
+    @GetMapping(value = "/kclogout", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void logout(HttpServletRequest request) throws ServletException {
+        request.logout();
     }
 }

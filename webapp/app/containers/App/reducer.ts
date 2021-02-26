@@ -52,7 +52,7 @@ const initialState = {
   downloadList: null,
   downloadListInfo: null,
   version: '',
-  oauth2Enabled: false
+  oauth2Enabled: true
 }
 
 const appReducer = (state = initialState, action) =>

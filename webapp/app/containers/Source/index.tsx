@@ -48,7 +48,8 @@ import {
   Tooltip,
   Icon,
   Popconfirm,
-  Breadcrumb
+  Breadcrumb,
+  Input
 } from 'antd'
 import { ButtonProps } from 'antd/lib/button/button'
 import { ColumnProps, PaginationConfig, SorterResult } from 'antd/lib/table'
@@ -76,6 +77,7 @@ import {
 } from './types'
 
 import utilStyles from 'assets/less/util.less'
+import Styles from 'components/ConditionValuesControl/ConditionValuesControl.less'
 
 type ISourceListProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps> &
@@ -95,7 +97,7 @@ interface ISourceListStates {
   editingSource: ISourceFormValues
   csvSourceId: number
 }
-
+const { Search } = Input
 const emptySource: ISourceFormValues = {
   id: 0,
   name: '',
@@ -191,19 +193,13 @@ export class SourceList extends React.PureComponent<
       {
         title: '名称',
         dataIndex: 'name',
-        filterDropdown: (
-          <SearchFilterDropdown
-            placeholder="名称"
-            value={tempFilterSourceName}
-            onChange={this.filterSourceNameChange}
-            onSearch={this.searchSource}
-          />
-        ),
-        filterDropdownVisible,
-        onFilterDropdownVisibleChange: (visible: boolean) =>
-          this.setState({
-            filterDropdownVisible: visible
-          }),
+        render: (text, row, index) =>
+          <Button
+            type="link"
+            className={utilStyles.linkButton}
+            onClick={this.editSource(row.id)}>
+            {text}
+          </Button>,
         sorter: (a, b) => (a.name > b.name ? -1 : 1),
         sortOrder:
           tableSorter && tableSorter.columnKey === 'name'
@@ -212,27 +208,21 @@ export class SourceList extends React.PureComponent<
       },
       {
         title: '描述',
-        dataIndex: 'description'
+        dataIndex: 'description',
+        sorter: (a, b) => (a.description > b.description ? -1 : 1),
+        sortOrder:
+          tableSorter && tableSorter.columnKey === 'description'
+            ? tableSorter.order
+            : void 0
       },
       {
         title: '类型',
         dataIndex: 'type',
-        filters: [
-          {
-            text: 'JDBC',
-            value: 'jdbc'
-          },
-          {
-            text: 'CSV',
-            value: 'csv'
-          }
-        ],
-        filterMultiple: false,
-        onFilter: (val, record) => record.type === val,
-        render: (_, record) => {
-          const type = record.type
-          return type && type.toUpperCase()
-        }
+        sorter: (a, b) => (a.type > b.type ? -1 : 1),
+        sortOrder:
+          tableSorter && tableSorter.columnKey === 'type'
+            ? tableSorter.order
+            : void 0
       }
     ]
 
@@ -254,25 +244,23 @@ export class SourceList extends React.PureComponent<
       columns.push({
         title: '操作',
         key: 'action',
-        width: 180,
+        width: 260,
         render: (_, record) => (
           <span className="ant-table-action-column">
             <Tooltip title="重置连接">
               <EditButton
-                icon="reload"
-                shape="circle"
-                type="ghost"
+                type="link"
                 disabled={resetLoading}
+                className={utilStyles.linkButton}
                 onClick={this.openResetSource(record)}
-              />
+              >重置连接</EditButton>
             </Tooltip>
             <Tooltip title="修改">
               <EditButton
-                icon="edit"
-                shape="circle"
-                type="ghost"
+                type="link"
+                className={utilStyles.linkButton}
                 onClick={this.editSource(record.id)}
-              />
+              >修改</EditButton>
             </Tooltip>
             <Popconfirm
               title="确定删除？"
@@ -280,7 +268,7 @@ export class SourceList extends React.PureComponent<
               onConfirm={this.deleteSource(record.id)}
             >
               <Tooltip title="删除">
-                <AdminButton icon="delete" shape="circle" type="ghost" />
+                <AdminButton type="link" className={utilStyles.linkButton}>删除</AdminButton>
               </Tooltip>
             </Popconfirm>
             {record && record.type === 'csv' ? (
@@ -506,21 +494,25 @@ export class SourceList extends React.PureComponent<
       simple: screenWidth <= 768
     }
     const filterSources = this.getFilterSources(filterSourceName, sources)
-
+    // 增加复选框
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log('onChange', `selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+      },
+      onSelect: (record, selected, selectedRows) => {
+        console.log('onSelect', record, selected, selectedRows)
+      }}
     return (
       <Container>
         <Helmet title="Source" />
         <ContainerTitle>
           <Row>
-            <Col span={24} className={utilStyles.shortcut}>
+            <Col span={24}>
               <Breadcrumb className={utilStyles.breadcrumb}>
                 <Breadcrumb.Item>
                   <Link to="">Source</Link>
                 </Breadcrumb.Item>
               </Breadcrumb>
-              <Link to={`/account/organization/${currentProject.orgId}`}>
-                <i className='iconfont icon-organization' />
-              </Link>
             </Col>
           </Row>
         </ContainerTitle>
@@ -532,13 +524,15 @@ export class SourceList extends React.PureComponent<
                 Source List
               </Box.Title>
               <Box.Tools>
-                <Tooltip placement="bottom" title="新增">
-                  <AdminButton
-                    type="primary"
-                    icon="plus"
-                    onClick={this.addSource}
-                  />
-                </Tooltip>
+                  <Tooltip placement="bottom" title="新增">
+                    <AdminButton
+                      type="primary"
+                      icon="plus"
+                      className={utilStyles.addButton}
+                      onClick={this.addSource}
+                    >新建</AdminButton>
+                  </Tooltip>
+                  <Search placeholder="名称" onSearch={this.searchSource} style={{ width: 200, marginLeft: 8 }} />
               </Box.Tools>
             </Box.Header>
             <Box.Body>
@@ -551,6 +545,7 @@ export class SourceList extends React.PureComponent<
                     dataSource={filterSources}
                     columns={tableColumns}
                     pagination={tablePagination}
+                    rowSelection={rowSelection}
                     onChange={this.tableChange}
                   />
                 </Col>

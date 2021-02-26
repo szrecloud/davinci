@@ -22,6 +22,7 @@ import { API_HOST } from '../globalConstants'
 
 export default {
   externalAuthProviders: `${API_HOST}/login/getOauth2Clients`,
+  kclogout: `${API_HOST}/login/kclogout`,
   tryExternalAuth: `${API_HOST}/login/externalLogin`,
   login: `${API_HOST}/login`,
   group: `${API_HOST}/groups`,

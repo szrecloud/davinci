@@ -184,16 +184,11 @@ public class UserServiceImpl extends BaseEntityService implements UserService {
         }
         user = new User();
 
-        String emailMapping = environment.getProperty(String.format("spring.security.oauth2.client.provider.%s.userMapping.email", oauthAuthToken.getAuthorizedClientRegistrationId()));
-        String nameMapping = environment.getProperty(String.format("spring.security.oauth2.client.provider.%s.userMapping.name", oauthAuthToken.getAuthorizedClientRegistrationId()));
-        String avatarMapping = environment.getProperty(String.format("spring.security.oauth2.client.provider.%s.userMapping.avatar", oauthAuthToken.getAuthorizedClientRegistrationId()));
         JSONObject jsonObj = new JSONObject(oauthUser.getAttributes());
 
-        user.setName(JsonPath.read(jsonObj, nameMapping));
+        user.setName(jsonObj.getString("preferred_username"));
         user.setUsername(oauthUser.getName());
         user.setPassword("OAuth2");
-        user.setEmail(JsonPath.read(jsonObj, emailMapping));
-        user.setAvatar(JsonPath.read(jsonObj, avatarMapping));
         int insert = userMapper.insert(user);
         if (insert > 0) {
             return user;
