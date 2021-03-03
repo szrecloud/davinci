@@ -2,6 +2,7 @@ package edp.davinci.core.config;
 
 import edp.core.config.OAuth2EnableCondition;
 import edp.davinci.core.common.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private KeycloakLogoutHandler keycloakLogoutHandler;
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(Constants.BASE_API_PATH + "/login");
@@ -25,7 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(Constants.BASE_API_PATH + "/login").permitAll()
                 .and().oauth2Login().loginPage("/")
-                .and().logout().logoutUrl("/login/oauth2/logout").permitAll()
+                .and().logout().logoutUrl("/login/oauth2/logout")
+                .addLogoutHandler(keycloakLogoutHandler).permitAll()
                 .and().csrf().disable();
     }
 }

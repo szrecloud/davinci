@@ -24,12 +24,11 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import AuthorizedRoute from './AuthorizedRoute'
 import { RouteComponentWithParams } from 'utils/types'
 import { createStructuredSelector } from 'reselect'
-
 import Navigator from 'components/Navigator'
 
 import { logged, logout, loadDownloadList } from '../App/actions'
 import { makeSelectLogged, makeSelectNavigator, makeSelectOauth2Enabled } from '../App/selectors'
-import { DOWNLOAD_LIST_POLLING_FREQUENCY, EXTERNAL_LOG_OUT_URL } from 'app/globalConstants'
+import { API_HOST, DOWNLOAD_LIST_POLLING_FREQUENCY, EXTERNAL_LOG_OUT_URL } from 'app/globalConstants'
 
 import { Project, ProjectList } from 'containers/Projects/Loadable'
 
@@ -82,7 +81,11 @@ export class Main extends React.Component<IMainProps, {}> {
     const { history, oauth2Enabled, onLogout } = this.props
     onLogout()
     if (oauth2Enabled) {
-      history.replace(EXTERNAL_LOG_OUT_URL)
+      const url = window.location.href
+      const host = url.split('#')[0]
+      window.open(host + 'login/oauth2/logout', '_self')
+      history.replace('/login')
+      // history.replace(EXTERNAL_LOG_OUT_URL)
     } else {
       history.replace('/login')
     }
