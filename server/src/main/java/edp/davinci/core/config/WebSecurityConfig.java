@@ -30,7 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(Constants.BASE_API_PATH + "/login").permitAll()
                 .and().oauth2Login().loginPage("/")
                 .and().logout().logoutUrl("/login/oauth2/logout")
-                .addLogoutHandler(keycloakLogoutHandler).permitAll()
+                .addLogoutHandler(keycloakLogoutHandler)
+                .permitAll()
                 .and().csrf().disable();
     }
 }

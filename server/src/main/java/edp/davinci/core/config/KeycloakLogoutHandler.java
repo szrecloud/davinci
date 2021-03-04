@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -28,7 +29,7 @@ public class KeycloakLogoutHandler implements org.springframework.security.web.a
     public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) {
         log.debug("==>logout LogoutHandler");
         try {
-            if (null != authentication.getPrincipal()) {
+            if (null != authentication && authentication instanceof OAuth2AuthenticationToken) {
                 propagateLogoutToKeycloak((OidcUser) authentication.getPrincipal());
             }
             httpServletRequest.logout();
