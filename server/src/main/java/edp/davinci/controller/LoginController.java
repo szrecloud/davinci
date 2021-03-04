@@ -144,10 +144,4 @@ public class LoginController {
         return ResponseEntity.status(401).build();
     }
 
-    @ApiOperation(value = "kc logout")
-    @AuthIgnore
-    @GetMapping(value = "/kclogout", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void logout(HttpServletRequest request) throws ServletException {
-        request.logout();
-    }
 }

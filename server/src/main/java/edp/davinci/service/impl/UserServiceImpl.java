@@ -187,7 +187,7 @@ public class UserServiceImpl extends BaseEntityService implements UserService {
         JSONObject jsonObj = new JSONObject(oauthUser.getAttributes());
 
         user.setName(jsonObj.getString("preferred_username"));
-        user.setUsername(oauthUser.getName());
+        user.setUsername(jsonObj.getString("preferred_username"));
         user.setPassword("OAuth2");
         int insert = userMapper.insert(user);
         if (insert > 0) {
