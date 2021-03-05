@@ -32,6 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/login/oauth2/logout")
                 .addLogoutHandler(keycloakLogoutHandler)
                 .permitAll()
-                .and().csrf().disable();
+                .and().headers()
+                .frameOptions().disable()
+                .and().csrf().disable()
+        ;
     }
 }

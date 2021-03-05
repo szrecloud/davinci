@@ -35,7 +35,7 @@ public class KeycloakLogoutHandler implements org.springframework.security.web.a
             httpServletRequest.logout();
             httpServletResponse.sendRedirect("/");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.info("Error:" + e);
         }
     }
 

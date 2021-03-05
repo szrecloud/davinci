@@ -178,13 +178,12 @@ public class UserServiceImpl extends BaseEntityService implements UserService {
     public User externalRegist(OAuth2AuthenticationToken oauthAuthToken) throws ServerException {
         OAuth2User oauthUser = oauthAuthToken.getPrincipal();
 
-        User user = getByUsername(oauthUser.getName());
+        JSONObject jsonObj = new JSONObject(oauthUser.getAttributes());
+        User user = getByUsername(jsonObj.getString("preferred_username"));
         if (user != null) {
             return user;
         }
         user = new User();
-
-        JSONObject jsonObj = new JSONObject(oauthUser.getAttributes());
 
         user.setName(jsonObj.getString("preferred_username"));
         user.setUsername(jsonObj.getString("preferred_username"));
