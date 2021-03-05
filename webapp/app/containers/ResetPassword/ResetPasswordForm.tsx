@@ -1,6 +1,8 @@
 import React from 'react'
 import { Col, Row, Input, Button, Form } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../i18n'
+
 const FormItem = Form.Item
 const styles = require('../Profile/profile.less')
 
@@ -43,6 +45,8 @@ export class ResetPasswordForm extends React.PureComponent<IResetPasswordProps &
     const newPassError = isFieldTouched('password') && getFieldError('password')
     const confirmPasswordError = isFieldTouched('confirmPassword') && getFieldError('confirmPassword')
     const isSubmit = this.hasErrors(getFieldsError())
+    
+    
     return (
       <Form className={styles.formView}>
         <Row>
@@ -68,7 +72,7 @@ export class ResetPasswordForm extends React.PureComponent<IResetPasswordProps &
                   message: '旧密码不能为空'
                 }]
               })(
-                <Input type="password" placeholder="Your Password" />
+                <Input type="password" placeholder={lang("YPassWord")} />
               )}
             </FormItem>
           </Col>
@@ -91,7 +95,7 @@ export class ResetPasswordForm extends React.PureComponent<IResetPasswordProps &
                   validator: this.forceCheckConfirm
                 }]
               })(
-                <Input type="password" placeholder="New Password" />
+                <Input type="password" placeholder={lang("NPassWord")} />
               )}
             </FormItem>
           </Col>
@@ -110,7 +114,7 @@ export class ResetPasswordForm extends React.PureComponent<IResetPasswordProps &
                   validator: this.checkPasswordConfirm
                 }]
               })(
-                <Input type="password" placeholder="Confirm Password" />
+                <Input type="password" placeholder={lang("TPassWord")} />
               )}
             </FormItem>
           </Col>

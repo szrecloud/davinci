@@ -4,6 +4,7 @@ const Option = Select.Option
 import ColorPicker from 'components/ColorPicker'
 import { PIVOT_CHART_FONT_FAMILIES, PIVOT_CHART_LINE_STYLES, PIVOT_CHART_FONT_SIZES } from 'app/globalConstants'
 import { getCorrectInputNumber } from '../../util'
+import { lang } from '../../../../../i18n'
 const styles = require('../Workbench.less')
 
 export interface IAxisConfig {
@@ -95,6 +96,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
     const fontSizes = PIVOT_CHART_FONT_SIZES.map((f) => (
       <Option key={`${f}`} value={`${f}`}>{f}</Option>
     ))
+    
 
     const xAxisLabel = showTitleAndUnit === void 0 && [(
       <Row key="gap1" gutter={8} type="flex" align="middle" className={styles.blockRow}>
@@ -102,7 +104,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
         <Col span={8}>旋转角度</Col>
         <Col span={10}>
             <InputNumber
-              placeholder="xAxisRotate"
+              placeholder={lang("XAxisRotate")}
               className={styles.blockElm}
               value={xAxisRotate}
               onChange={this.inputNumberChange('xAxisRotate')}
@@ -120,7 +122,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
         <Col span={8}>刻度间隔</Col>
         <Col span={10}>
           <InputNumber
-            placeholder="xAxisInterval"
+            placeholder={lang("XAxisInterval")}
             className={styles.blockElm}
             value={xAxisInterval}
             onChange={this.inputNumberChange('xAxisInterval')}
@@ -129,7 +131,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
         </Col>
       </Row>
     )]
-
+    
     const titleAndUnit = showTitleAndUnit !== void 0 && [(
       <Row key="title" gutter={8} type="flex" align="middle" className={styles.blockRow}>
         <Col span={24}>
@@ -191,7 +193,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
         <Col span={12}>标题旋转</Col>
         <Col span={10}>
           <InputNumber
-            placeholder="width"
+            placeholder={lang("Width")}
             className={styles.blockElm}
             value={nameRotate}
             onChange={this.inputNumberChange('nameRotate')}
@@ -203,7 +205,7 @@ export class AxisSection extends React.PureComponent<IAxisSectionProps, {}> {
         <Col span={12}>标题与轴线距离</Col>
         <Col span={10}>
           <InputNumber
-            placeholder="nameGap"
+            placeholder={lang("NameGap")}
             className={styles.blockElm}
             value={nameGap}
             onChange={this.inputNumberChange('nameGap')}

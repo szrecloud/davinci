@@ -26,6 +26,8 @@ import React, {
 import classnames from 'classnames'
 import { Form, Row, Col, Input, Tag, Button, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
+import { lang } from '../../../i18n'
+
 const TextArea = Input.TextArea
 const Option = Select.Option
 const FormItem = Form.Item
@@ -93,7 +95,7 @@ const ProjectsForm: React.FC<IProjectsFormProps & FormComponentProps> = ({
 
 
     useImperativeHandle(ref, () => ({form}))
-
+    
     return (
       <div className={styles.formWrapper}>
         <div className={styles.header}>
@@ -176,7 +178,7 @@ const ProjectsForm: React.FC<IProjectsFormProps & FormComponentProps> = ({
                       }],
                       validateFirst: true
                     })(
-                      <Input placeholder="Name" />
+                      <Input placeholder={lang("Name")} />
                     )}
                   </FormItem>
                 )}
@@ -188,7 +190,7 @@ const ProjectsForm: React.FC<IProjectsFormProps & FormComponentProps> = ({
                       initialValue: currentPro.description
                     })(
                       <TextArea
-                        placeholder="Description"
+                        placeholder={lang("Description")}
                         autosize={{minRows: 2, maxRows: 6}}
                       />
                     )}

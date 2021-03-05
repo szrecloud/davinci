@@ -22,6 +22,7 @@ import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { Form, Row, Col, Input, Radio, Steps, Transfer } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const Step = Steps.Step
@@ -57,7 +58,7 @@ export class RoleForm extends React.PureComponent<IRoleFormProps & FormComponent
       labelCol: { span: 6 },
       wrapperCol: { span: 15 }
     }
-
+    
     return (
       <Form>
         <Row>
@@ -76,10 +77,10 @@ export class RoleForm extends React.PureComponent<IRoleFormProps & FormComponent
                 initialValue: '',
                 rules: [{
                     required: true,
-                    message: 'Name 不能为空'
+                    message: '名称不能为空'
                   }]
               })(
-                <Input placeholder="Name" />
+                <Input placeholder={lang("Name")} />
               )}
             </FormItem>
           </Col>
@@ -88,7 +89,7 @@ export class RoleForm extends React.PureComponent<IRoleFormProps & FormComponent
               {getFieldDecorator('description', {
                 initialValue: ''
               })(
-                <Input.TextArea placeholder="description" />
+                <Input.TextArea placeholder={lang("Description")} />
               )}
             </FormItem>
           </Col>

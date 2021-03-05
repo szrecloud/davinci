@@ -1,2 +1,22 @@
 {
+    "User": "用户名",
+    "PassWord": "密码",
+    "Search": "搜索",
+    "Name": "名称",
+    "Description": "描述",
+    "YPassWord": "原密码",
+    "NPassWord": "新密码",
+    "TPassWord": "确认密码",
+    "Connection": "链接Url",
+    "Width": "宽度",
+    "Height": "高度",
+    "BorderWidth": "边框宽度",
+    "Opacity": "透明度",
+    "XAxisRotate": "x轴旋转角度",
+    "XAxisInterval": "x轴刻度间隔",
+    "NameGap": "间隙",
+    "YAxisLeft": "左Y轴",
+    "YAxisRight": "右Y轴",
+    "Speed": "速冻",
+    "NodeWidth": "节点宽度"
 }

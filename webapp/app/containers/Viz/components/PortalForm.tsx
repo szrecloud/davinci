@@ -22,6 +22,8 @@ import React from 'react'
 
 import { Form, Row, Col, Input, Radio, Tabs, Tree, Checkbox } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
+
 const TreeNode = Tree.TreeNode
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -78,6 +80,7 @@ export class PortalForm extends React.PureComponent<IProtalListProps & FormCompo
       labelCol: { span: 6 },
       wrapperCol: { span: 16 }
     }
+    
 
     return (
       <Form>
@@ -102,12 +105,12 @@ export class PortalForm extends React.PureComponent<IProtalListProps & FormCompo
                   {getFieldDecorator('name', {
                     rules: [{
                       required: true,
-                      message: 'Name 不能为空'
+                      message: '名称不能为空'
                     }, {
                       validator: this.checkNameUnique
                     }]
                   })(
-                    <Input placeholder="Name" />
+                    <Input placeholder={lang("Name")} />
                   )}
                 </FormItem>
               </Col>
@@ -117,7 +120,7 @@ export class PortalForm extends React.PureComponent<IProtalListProps & FormCompo
                     initialValue: ''
                   })(
                     <TextArea
-                      placeholder="Description"
+                      placeholder={lang("Description")}
                       autosize={{minRows: 2, maxRows: 6}}
                     />
                   )}

@@ -8,6 +8,7 @@ import InputNumber from 'antd/lib/input-number'
 import ColorPicker from 'components/ColorPicker'
 import { PIVOT_CHART_YAXIS_OPTIONS, PIVOT_CHART_LINE_STYLES, PIVOT_CHART_FONT_FAMILIES, PIVOT_CHART_FONT_SIZES } from 'app/globalConstants'
 const styles = require('../Workbench.less')
+import { lang } from '../../../../../i18n'
 
 export interface IDoubleYAxisConfig {
   yAxisLeft: string
@@ -80,6 +81,7 @@ export class DoubleYAxisSection extends React.PureComponent<IDoubleYAxisSectionP
     const fontSizes = PIVOT_CHART_FONT_SIZES.map((f) => (
       <Option key={`${f}`} value={`${f}`}>{f}</Option>
     ))
+    
 
     return (
       <div className={styles.paneBlock}>
@@ -92,7 +94,7 @@ export class DoubleYAxisSection extends React.PureComponent<IDoubleYAxisSectionP
           <Row gutter={8} type="flex" align="middle" className={styles.blockRow}>
             <Col span={10}>
               <Select
-                placeholder="yAxisLeft"
+                placeholder={lang("YAxisLeft")}
                 className={styles.blockElm}
                 value={yAxisLeft}
                 onChange={this.selectChange('yAxisLeft')}
@@ -102,7 +104,7 @@ export class DoubleYAxisSection extends React.PureComponent<IDoubleYAxisSectionP
             </Col>
             <Col span={10}>
               <Select
-                placeholder="yAxisRight"
+                placeholder={lang("YAxisRight")}
                 className={styles.blockElm}
                 value={yAxisRight}
                 onChange={this.selectChange('yAxisRight')}

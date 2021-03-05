@@ -25,6 +25,7 @@ import { Form, Row, Col, Table, Input, InputNumber, Select, Steps } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
 import { SortOrder, RowSelectionType } from 'antd/lib/table'
 import { IDashboard } from '../types'
+import { lang } from '../../../i18n'
 const FormItem = Form.Item
 const Option = Select.Option
 const Step = Steps.Step
@@ -205,13 +206,14 @@ export class DashboardItemForm extends React.PureComponent<IDashboardItemFormPro
       selectedRowKeys
     } = this.state
     const dashboardType = currentDashboard.type
+    
     const columns = [{
       title: '名称',
       dataIndex: 'name',
       key: 'name',
       filterDropdown: (
         <SearchFilterDropdown
-          placeholder="name"
+          placeholder={lang("Name")}
           value={nameFilterValue}
           onChange={this.onSearchInputChange}
           onSearch={this.onSearch}

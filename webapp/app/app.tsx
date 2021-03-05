@@ -31,7 +31,7 @@ import App from 'containers/App'
 import { ConfigProvider } from 'antd'
 import zh_CN from 'antd/es/locale/zh_CN'
 import LanguageProvider from 'containers/LanguageProvider'
-import { translationMessages } from './i18n'
+import { translationMessages, lang } from './i18n'
 import moment from 'moment'
 import 'moment/dist/locale/zh-cn'
 moment.locale('zh-cn')
@@ -78,6 +78,7 @@ import 'echarts/lib/component/brush'
 import 'echarts/lib/component/markLine'
 import 'echarts/lib/component/markArea'
 import 'assets/js/china.js'
+import './i18n'
 
 import { DEFAULT_ECHARTS_THEME } from 'app/globalConstants'
 echarts.registerTheme('default', DEFAULT_ECHARTS_THEME)

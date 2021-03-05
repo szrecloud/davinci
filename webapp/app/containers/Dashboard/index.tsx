@@ -81,6 +81,7 @@ import { OrganizationActions } from '../Organizations/actions'
 const { loadProjectRoles } = OrganizationActions
 import { RouteComponentWithParams } from 'utils/types'
 import { IWidgetFormed } from '../Widget/types'
+import { lang } from '../../i18n'
 
 import { Grid } from './Loadable'
 
@@ -781,7 +782,7 @@ export class Dashboard extends React.Component<IDashboardProps, IDashboardStates
 
     const portalName = currentPortal && currentPortal.name
     const portalDesc = currentPortal && currentPortal.description
-
+    
     return (
       <div className={styles.portal}>
         <EditorHeader
@@ -813,7 +814,7 @@ export class Dashboard extends React.Component<IDashboardProps, IDashboardStates
                       content={
                         <div className={styles.portalTreeSearch}>
                           <Search
-                            placeholder="Search"
+                            placeholder={lang("Search")}
                             onChange={this.searchDashboard}
                           />
                           <ul>

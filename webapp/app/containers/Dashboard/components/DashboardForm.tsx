@@ -23,6 +23,7 @@ import React from 'react'
 import { Form, Row, Col, Input, Radio, Select, Tabs, Checkbox} from 'antd'
 import { IExludeRoles } from 'containers/Viz/components/PortalList'
 import { FormComponentProps } from 'antd/lib/form'
+import { lang } from '../../../i18n'
 const styles = require('containers/Viz/Viz.less')
 const TabPane = Tabs.TabPane
 const Option = Select.Option
@@ -89,7 +90,7 @@ export class DashboardForm extends React.PureComponent<IDashboardFormProps, {}> 
       deleteType = deleteItem.type === 0 ? '文件夹' : 'Dashboard'
       deleteName = deleteItem.name
     }
-
+    
     return (
       <Form>
         {type !== 'add' && type !== 'copy' && (
@@ -155,12 +156,12 @@ export class DashboardForm extends React.PureComponent<IDashboardFormProps, {}> 
               {getFieldDecorator('name', {
                 rules: [{
                   required: true,
-                  message: 'Name 不能为空'
+                  message: '名称不能为空'
                 }, {
                   validator: this.checkNameUnique
                 }]
               })(
-                <Input placeholder="Name" />
+                <Input placeholder={lang("Name")} />
               )}
             </FormItem>
             <FormItem

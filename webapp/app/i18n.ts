@@ -18,6 +18,9 @@
  * >>
  */
 
+import { message } from "antd"
+import languageProviderReducer from "./containers/LanguageProvider/reducer"
+
 /**
  * i18n.js
  *
@@ -34,7 +37,17 @@ const zhTranslationMessages = require('./translations/zh.json')
 addLocaleData(enLocaleData)
 addLocaleData(zhLocaleData)
 
-export const DEFAULT_LOCALE = 'en'
+export let DEFAULT_LOCALE = ''
+
+export function setDEFAULT_LOCALE(lang){
+    localStorage.setItem('lang', lang);
+    return DEFAULT_LOCALE = lang;
+}
+
+export function getDEFAULT_LOCALE(){
+    DEFAULT_LOCALE = localStorage.getItem('lang');
+    return DEFAULT_LOCALE;
+}
 
 export const appLocales = [
   'en',
@@ -62,4 +75,22 @@ export const formatTranslationMessages = (locale, messages) => {
 export const translationMessages = {
   en: formatTranslationMessages('en', enTranslationMessages),
   zh: formatTranslationMessages('zh', zhTranslationMessages)
+}
+
+export const lang = (message) => {
+    DEFAULT_LOCALE = getDEFAULT_LOCALE();
+    if(!DEFAULT_LOCALE){
+        DEFAULT_LOCALE = 'zh';
+        localStorage.setItem('lang', 'zh');
+    }
+    return translationMessages[DEFAULT_LOCALE][message];
+}
+
+interface IWindow extends Window {
+    funLang: (any) => void
+}
+declare const window: IWindow
+
+window.funLang = function funLang(message){
+    return lang(message);
 }

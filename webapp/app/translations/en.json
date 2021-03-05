@@ -1,2 +1,22 @@
 {
+    "User": "username",
+    "PassWord": "password",
+    "Search": "Search",
+    "Name": "Name",
+    "Description": "Description",
+    "YPassWord": "Your Password",
+    "NPassWord": "New Password",
+    "TPassWord": "Confirm Password",
+    "Connection": "Connection Url",
+    "Width": "Width",
+    "Height": "Height",
+    "BorderWidth": "BorderWidth",
+    "Opacity": "Opacity",
+    "XAxisRotate": "XAxisRotate",
+    "XAxisInterval": "XAxisInterval",
+    "NameGap": "NameGap",
+    "YAxisLeft": "YAxisLeft",
+    "YAxisRight": "YAxisRight",
+    "Speed": "Speed",
+    "NodeWidth": "NodeWidth"
 }

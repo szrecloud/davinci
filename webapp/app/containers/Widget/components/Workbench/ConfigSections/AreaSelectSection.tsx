@@ -1,6 +1,8 @@
 import React from 'react'
 import { Row, Col, InputNumber } from 'antd'
 import ColorPicker from 'components/ColorPicker'
+import { lang } from '../../../../../i18n'
+
 const styles = require('../Workbench.less')
 
 export interface IAreaSelectConfig {
@@ -37,6 +39,7 @@ export class AreaSelectSection extends React.PureComponent<IAreaSelectSectionPro
       color,
       opacity
     } = config
+    
 
     return (
       <div className={styles.paneBlock}>
@@ -46,7 +49,7 @@ export class AreaSelectSection extends React.PureComponent<IAreaSelectSectionPro
             <Col span={6}>背景</Col>
             <Col span={14}>
               <InputNumber
-                placeholder="width"
+                placeholder={lang("Width")}
                 className={styles.blockElm}
                 value={width}
                 min={1}
@@ -65,7 +68,7 @@ export class AreaSelectSection extends React.PureComponent<IAreaSelectSectionPro
             <Col span={6}>边框</Col>
             <Col span={14}>
               <InputNumber
-                placeholder="borderWidth"
+                placeholder={lang("BorderWidth")}
                 className={styles.blockElm}
                 value={borderWidth}
                 min={1}
@@ -84,7 +87,7 @@ export class AreaSelectSection extends React.PureComponent<IAreaSelectSectionPro
             <Col span={6}>透明度</Col>
             <Col span={8}>
               <InputNumber
-                placeholder="opacity"
+                placeholder={lang("Opacity")}
                 className={styles.blockElm}
                 value={opacity}
                 min={0}

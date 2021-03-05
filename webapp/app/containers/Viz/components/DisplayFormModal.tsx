@@ -21,6 +21,7 @@
 import React from 'react'
 import { Form, Row, Col, Input, Radio, Button, Tabs, Modal, Checkbox } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
 const TextArea = Input.TextArea
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
@@ -136,6 +137,7 @@ export class DisplayFormModal extends React.PureComponent<IDisplayFormModalProps
         保 存
       </Button>
     )]
+    
 
     return (
       <Modal
@@ -170,7 +172,7 @@ export class DisplayFormModal extends React.PureComponent<IDisplayFormModalProps
                           validator: this.checkNameUnique
                         }]
                       })(
-                        <Input placeholder="Name" />
+                        <Input placeholder={lang("Name")} />
                       )}
                     </FormItem>
                   </Col>
@@ -180,7 +182,7 @@ export class DisplayFormModal extends React.PureComponent<IDisplayFormModalProps
                         initialValue: ''
                       })(
                         <TextArea
-                          placeholder="Description"
+                          placeholder={lang("Description")}
                           autosize={{minRows: 2, maxRows: 6}}
                         />
                       )}

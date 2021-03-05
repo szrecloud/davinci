@@ -22,6 +22,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Form, Row, Col, Input, Tag, Button, Select } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
 const TextArea = Input.TextArea
 const Option = Select.Option
 const FormItem = Form.Item
@@ -111,6 +112,7 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
     } else if (type === 'transfer') {
       modalTitle = '移交'
     }
+    
     return (
       <div className={styles.formWrapper}>
         <div className={styles.header}>
@@ -161,13 +163,13 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
                     {getFieldDecorator('name', {
                       rules: [{
                         required: true,
-                        message: 'Name 不能为空'
+                        message: '名称不能为空'
                       }, {
                         validator: onCheckUniqueName
                       }],
                       validateFirst: true
                     })(
-                      <Input placeholder="Name" />
+                      <Input placeholder={lang("Name")} />
                     )}
                   </FormItem>
                 )}
@@ -179,7 +181,7 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
                       initialValue: ''
                     })(
                       <TextArea
-                        placeholder="Description"
+                        placeholder={lang("Description")}
                         autosize={{minRows: 2, maxRows: 6}}
                       />
                     )}

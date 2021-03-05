@@ -4,6 +4,8 @@ const Option = Select.Option
 import ColorPicker from 'components/ColorPicker'
 import { PIVOT_CHART_FONT_FAMILIES, PIVOT_CHART_LINE_STYLES, PIVOT_CHART_FONT_SIZES, CHART_VISUALMAP_POSITIONS, CHART_VISUALMAP_DIRECYTIONS } from 'app/globalConstants'
 const styles = require('../Workbench.less')
+import { lang } from '../../../../../i18n'
+
 
 export interface IVisualMapConfig {
   showVisualMap: boolean
@@ -71,7 +73,7 @@ export class VisualMapSection extends React.PureComponent<IVisualMapSectionProps
     const fontSizes = PIVOT_CHART_FONT_SIZES.map((f) => (
       <Option key={f} value={`${f}`}>{f}</Option>
     ))
-
+    
     return (
       <div className={styles.paneBlock}>
         <h4>{title}</h4>
@@ -114,7 +116,7 @@ export class VisualMapSection extends React.PureComponent<IVisualMapSectionProps
             <Col span={4}>宽度</Col>
             <Col span={8}>
               <InputNumber
-                placeholder="width"
+                placeholder={lang("Width")}
                 className={styles.blockElm}
                 value={visualMapWidth}
                 min={1}
@@ -124,7 +126,7 @@ export class VisualMapSection extends React.PureComponent<IVisualMapSectionProps
             <Col span={4}>高度</Col>
             <Col span={8}>
               <InputNumber
-                placeholder="height"
+                placeholder={lang("Height")}
                 className={styles.blockElm}
                 value={visualMapHeight}
                 min={1}

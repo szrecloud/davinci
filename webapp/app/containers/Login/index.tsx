@@ -25,6 +25,8 @@ import { createStructuredSelector } from 'reselect'
 import { RouteComponentProps } from 'react-router-dom'
 
 import LoginForm from './LoginForm'
+import { Icon, Menu, Dropdown } from 'antd'
+import { DEFAULT_LOCALE, setDEFAULT_LOCALE, getDEFAYLT_LOCALE } from '../../i18n';
 
 import { compose } from 'redux'
 
@@ -79,6 +81,15 @@ export class Login extends React.PureComponent<
     const { history } = this.props
     history.push('/findPassword')
   }
+  
+  private zhLang = () => {
+    setDEFAULT_LOCALE('zh');
+    this.render();
+  }
+
+  private enLang = () => {
+    setDEFAULT_LOCALE('en');
+  }
 
   private changeUsername = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
@@ -123,6 +134,21 @@ export class Login extends React.PureComponent<
   }
 
   public render() {
+    const menu = (
+        <Menu>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" onClick={this.zhLang}>
+              中文
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" onClick={this.enLang}>
+              英文
+            </a>
+          </Menu.Item>
+        </Menu>
+      );
+    
     const { loginLoading, oauth2Enabled } = this.props
     const { username, password } = this.state
     return (
@@ -151,6 +177,11 @@ export class Login extends React.PureComponent<
           >
             忘记密码？
           </a>
+          <Dropdown overlay={menu}>
+            <a className="ant-dropdown-link">
+            语言选择
+            </a>
+          </Dropdown>
         </p>
         {oauth2Enabled && <ExternalLogin />}
       </div>

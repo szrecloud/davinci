@@ -22,6 +22,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { Form, Row, Col, Input, Tag, Button, Select, Menu, Icon, Tooltip, Popconfirm, Table, Modal} from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
 const TextArea = Input.TextArea
 const Option = Select.Option
 const FormItem = Form.Item
@@ -164,6 +165,7 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
       const { currentProject: {name, id, description, visibility, createBy}} = this.props
       const currentState = this.props.form.getFieldsValue()
       const disabled = name !== currentState.name || description !== currentState.description || `${visibility}` !== currentState.visibility
+      
       mode =  (
       <div className={styles.basic}>
         <Form>
@@ -181,12 +183,12 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
                       //  hidden: this.props.type === 'transfer',
                         rules: [{
                           required: true,
-                          message: 'Name 不能为空'
+                          message: '名称不能为空'
                         }, {
                           validator: onCheckUniqueName
                         }]
                       })(
-                        <Input placeholder="Name" />
+                        <Input placeholder={lang("Name")} />
                       )}
                     </FormItem>
                 </Col>
@@ -216,7 +218,7 @@ export class ProjectsForm extends React.PureComponent<IProjectsFormProps & FormC
                       initialValue: ''
                     })(
                       <TextArea
-                        placeholder="Description"
+                        placeholder={lang("Description")}
                         autosize={{minRows: 2, maxRows: 6}}
                       />
                     )}

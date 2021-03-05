@@ -21,6 +21,7 @@
 import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { lang } from '../../../i18n'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
 const styles = require('../Organization.less')
@@ -52,6 +53,7 @@ export class OrganizationForm extends React.PureComponent<IProjectsFormProps & F
         保 存
       </Button>
     )]
+    
     return (
       <div className={styles.formWrapper}>
         <div className={styles.header}>
@@ -70,13 +72,13 @@ export class OrganizationForm extends React.PureComponent<IProjectsFormProps & F
                   {getFieldDecorator('name', {
                     rules: [{
                       required: true,
-                      message: 'Name 不能为空'
+                      message: '名称不能为空'
                     }, {
                       validator: this.props.onCheckUniqueName
                     }],
                     validateFirst: true
                   })(
-                    <Input placeholder="Name" />
+                    <Input placeholder={lang("Name")} />
                   )}
                 </FormItem>
               </Col>
@@ -86,7 +88,7 @@ export class OrganizationForm extends React.PureComponent<IProjectsFormProps & F
                     initialValue: ''
                   })(
                     <TextArea
-                      placeholder="Description"
+                      placeholder={lang("Description")}
                       autosize={{minRows: 2, maxRows: 6}}
                     />
                   )}

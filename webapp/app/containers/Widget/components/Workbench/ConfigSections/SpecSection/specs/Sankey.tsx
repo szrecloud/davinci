@@ -6,6 +6,7 @@ import { onSectionChange } from './util'
 import { ISpecConfig } from '../types'
 
 import styles from '../../../Workbench.less'
+import { lang } from '../../../../../../../i18n'
 
 interface ISpecSectionSankeyProps {
   spec: ISpecConfig
@@ -16,7 +17,8 @@ interface ISpecSectionSankeyProps {
 function SpecSectionSankey (props: ISpecSectionSankeyProps) {
   const { spec, title, onChange } = props
   const { draggable, nodeWidth, nodeGap, orient } = spec
-
+  
+  
   return (
     <div className={styles.paneBlock}>
       <h4>{title}</h4>
@@ -49,7 +51,7 @@ function SpecSectionSankey (props: ISpecSectionSankeyProps) {
           <Col span={6}>节点宽度</Col>
           <Col span={6}>
             <InputNumber
-              placeholder="nodeWidth"
+              placeholder={lang("NodeWidth")}
               className={styles.blockElm}
               value={nodeWidth}
               min={0}

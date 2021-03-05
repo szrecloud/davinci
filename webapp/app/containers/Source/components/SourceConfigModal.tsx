@@ -39,6 +39,7 @@ const Option = Select.Option
 import { FormComponentProps } from 'antd/lib/form/Form'
 import { CascaderOptionType } from 'antd/lib/cascader'
 import { SourceProperty } from './types'
+// import { lang } from '../../../i18n'
 import {
   EditableFormTable,
   EditableColumnProps
@@ -218,6 +219,10 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
 
   const save = useCallback(
     () => {
+        // console.log(th);
+        // console.log(a);
+        // console.log(t);
+        // console.log(b);
       form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           values.config.properties = sourceProperties.filter(({ key }) => !!key)
@@ -269,7 +274,10 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
     ],
     [form, formLoading, sourceProperties, onSave, onClose]
   )
-
+  
+//   let th = lang();
+//   let a = th("en", t.en);
+//   let b = changLang(DEFAULT_LOCALE, "User");
   return (
     <Modal
       title={`${!sourceId ? '新增' : '修改'} Source`}
@@ -297,7 +305,7 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
                     validator: checkNameUnique
                   }
                 ]
-              })(<Input autoComplete="off" placeholder="Name" />)}
+              })(<Input autoComplete="off" placeholder={window.funLang("Name")} />)}
             </FormItem>
           </Col>
         </Row>
@@ -331,7 +339,7 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
             <FormItem label="用户名" {...commonFormItemStyle}>
               {getFieldDecorator('config.username', {
                 initialValue: ''
-              })(<Input autoComplete="off" placeholder="User" />)}
+              })(<Input autoComplete="off" placeholder={window.funLang("User")} />)}
             </FormItem>
           </Col>
           <Col span={12}>
@@ -341,7 +349,7 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
               })(
                 <Input
                   autoComplete="off"
-                  placeholder="Password"
+                  placeholder={window.funLang("PassWord")}
                   type="password"
                 />
               )}
@@ -359,7 +367,7 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
             initialValue: ''
           })(
             <Input
-              placeholder="Connection Url"
+              placeholder={window.funLang("Connection")}
               autoComplete="off"
               addonAfter={
                 testLoading ? (
@@ -381,7 +389,7 @@ const SourceConfigModal: React.FC<ISourceConfigModalProps> = (props) => {
             initialValue: ''
           })(
             <TextArea
-              placeholder="Description"
+              placeholder={window.funLang("Description")}
               autosize={{ minRows: 2, maxRows: 6 }}
             />
           )}

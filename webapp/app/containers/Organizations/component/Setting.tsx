@@ -2,6 +2,8 @@ import React from 'react'
 const styles = require('../Organization.less')
 import { Button, Input, Form, Row, Col, Radio, Modal } from 'antd'
 import {FormComponentProps} from 'antd/lib/form'
+import { lang } from '../../../i18n'
+
 const FormItem = Form.Item
 const RadioButton = Radio.Button
 import UploadAvatar from 'components/UploadAvatar'
@@ -75,7 +77,7 @@ export class Setting extends React.PureComponent <ISettingProps> {
     ) {
         isDisabled = false
     }
-
+    
     return (
       <div className={styles.listWrapper}>
         <div className={styles.container}>
@@ -100,7 +102,7 @@ export class Setting extends React.PureComponent <ISettingProps> {
                        // validator: this.checkNameUnique
                       }]
                     })(
-                      <Input placeholder="Name"/>
+                      <Input placeholder={lang("Name")}/>
                     )}
                   </FormItem>
                 </Col>
@@ -111,7 +113,7 @@ export class Setting extends React.PureComponent <ISettingProps> {
                   >
                     {getFieldDecorator('description', {
                     })(
-                      <Input placeholder="description" />
+                      <Input placeholder={lang("Description")} />
                     )}
                   </FormItem>
                 </Col>

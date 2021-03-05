@@ -6,6 +6,8 @@ import { ISpecConfig } from '../types'
 import { chartLayerTypeOptions, chartSymbolTypeOptions } from '../../constants'
 
 import styles from '../../../Workbench.less'
+import { lang } from '../../../../../../../i18n'
+
 
 interface ISpecSectionMapProps {
   spec: ISpecConfig
@@ -17,7 +19,8 @@ interface ISpecSectionMapProps {
 function SpecSectionMap (props: ISpecSectionMapProps) {
   const { spec, isLegendSection, title, onChange } = props
   const { roam, layerType, linesSpeed, symbolType } = spec
-
+  
+  
   return (
     <div className={styles.paneBlock}>
       <h4>{title}</h4>
@@ -50,7 +53,7 @@ function SpecSectionMap (props: ISpecSectionMapProps) {
             <Col span={4}>速度</Col>
             <Col span={6}>
               <InputNumber
-                placeholder="speed"
+                placeholder={lang("Speed")}
                 className={styles.blockElm}
                 value={linesSpeed}
                 min={0}
